@@ -22,28 +22,8 @@ unsigned int binary_to_uint(const char *b)
 		curr = b[i] - '0';
 		if (curr != 0 && curr != 1)
 			return (0);
-		result = result + (curr * power(2, p));
+		result = result + (curr << p);
 		p++;
 	}
-	return (result);
-}
-
-/**
- * power - calculates a power
- * @a: base
- * @b: power
- *
- * Return: result
- **/
-
-int power(int a, int b)
-{
-	int i, result = 1;
-
-	for (i = 0; i < b; i++)
-	{
-		result = result * a;
-	}
-
 	return (result);
 }
