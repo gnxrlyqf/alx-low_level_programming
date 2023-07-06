@@ -19,9 +19,9 @@ unsigned int binary_to_uint(const char *b)
 		return (0);
 	for (i = index; i >= 0; i--)
 	{
-		curr = b[i] - '0';
-		if (curr != 0 && curr != 1)
+		if (b[i] < '0' || b[i] > '1')
 			return (0);
+		curr = b[i] - '0';
 		result = result + (curr << p);
 		p++;
 	}
