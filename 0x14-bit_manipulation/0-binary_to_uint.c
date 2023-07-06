@@ -15,6 +15,8 @@ unsigned int binary_to_uint(const char *b)
 	int p = 0;
 	int curr, i, result = 0;
 
+	if (!b)
+		return (0);
 	for (i = index; i >= 0; i--)
 	{
 		curr = b[i] - '0';
