@@ -1,3 +1,4 @@
+#include <main.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -18,8 +19,6 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	int w;
 	char *buffer;
 
-	if (filename == NULL)
-		return (0);
 	buffer = malloc(letters * sizeof(char));
 	o = open(filename, O_RDONLY);
 	if (o == -1)
