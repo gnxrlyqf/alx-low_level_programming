@@ -49,7 +49,14 @@ int main(int ac, char **av)
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
 		exit(98);
 	}
-	w = write(to, buffer, 1024);
+	while (r > 0)
+	{
+		w = write(to, &buffer, r);
+		if (w == -1)
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]),
+				exit(99);
+		r = read(from, &buffer, 1024);
+	}
 	if (w == -1)
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]), exit(99);
 	if (close(from) == -1)
