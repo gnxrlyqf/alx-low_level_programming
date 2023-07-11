@@ -31,7 +31,11 @@ int main(int ac, char **av)
 	}
 	to = open(av[2], O_CREAT | O_WRONLY | O_TRUNC, 0600);
 	if (to == -1)
+	{
+		if (close(from) == -1)
+			dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", to), exit(100);
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]), exit(99);
+	}
 	r = read(from, buffer, 1024);
 	if (r == -1)
 	{
