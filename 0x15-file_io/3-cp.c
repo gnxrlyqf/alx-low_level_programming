@@ -30,6 +30,8 @@ int main(int ac, char **av)
 		exit(98);
 	}
 	to = open(av[2], O_CREAT | O_WRONLY | O_TRUNC, 0600);
+	if (to == -1)
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]), exit(99);
 	r = read(from, buffer, 1024);
 	if (r == -1)
 	{
@@ -44,7 +46,7 @@ int main(int ac, char **av)
 				exit(99);
 		r = read(from, &buffer, 1024);
 	}
-	if (w == -1 || to == -1)
+	if (w == -1)
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]), exit(99);
 	if (close(from) == -1)
 		dprintf(STDERR_FILENO, "Error: Can't close fd %s\n", av[1]), exit(100);
