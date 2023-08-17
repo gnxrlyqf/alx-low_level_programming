@@ -1,14 +1,13 @@
 #include "lists.h"
-#include <stdio.h>
 
 /**
- * print_dlistint - prints the elements of a linked list
+ * dlistint_len - counts the size of the linked list
  * @h: head node to the linked list
  *
  * Return: number of elements
 */
 
-size_t print_dlistint(const dlistint_t *h)
+size_t dlistint_len(const dlistint_t *h)
 {
 	int elements;
 	dlistint_t *current = (dlistint_t *)h;
@@ -17,7 +16,6 @@ size_t print_dlistint(const dlistint_t *h)
 		return (0);
 	while (current)
 	{
-		printf("%d\n", current->n);
 		elements++;
 		current = current->next;
 	}
