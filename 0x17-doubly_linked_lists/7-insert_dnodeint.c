@@ -3,9 +3,11 @@
 #include <stdio.h>
 
 /**
- * get_dnodeint_at_index - retrieves the indexed node
- * @head: pointer to the head node of the linked list
- * @index: index to retrieve
+ * insert_dnodeint_at_index - inserts a node at the given index
+ * @h: pointer to the head node of the linked list
+ * @idx: index to insert
+ * @n: data to insert
+ *
  *
  * Return: indexed node, or NULL
 */
@@ -15,15 +17,15 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	dlistint_t *current, *prev, *node = malloc(sizeof(dlistint_t));
 	unsigned int i = 0;
 
-	if(!node || !(*h))
-		return(NULL);
+	if (!node || !(*h))
+		return (NULL);
 	node->n = n;
 
 	if (idx == 0)
 	{
 		node->prev = NULL;
 		node->next = *h;
-		if(*h)
+		if (*h)
 			(*h)->prev = node;
 		*h = node;
 		return (*h);
@@ -33,6 +35,8 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	{
 		prev = current;
 		current = current->next;
+		if (!current)
+			break;
 		i++;
 	}
 	prev->next = node;
