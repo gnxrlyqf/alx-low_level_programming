@@ -14,16 +14,30 @@
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index = key_index((const unsigned char *)key, ht->size);
-	hash_node_t *node = malloc(sizeof(hash_node_t));
-	hash_node_t *temp;
+	hash_node_t *node = malloc(sizeof(hash_node_t)), *temp;
+	char *string;
+	int i;
 
 	if (!node)
 		return (0);
-	if (!ht || key[0] == '\0')
+	if (!ht || !key || !value || key[0] == '\0')
 		return (free(node), 0);
+	string = strdup(value);
+	if (!string)
+		return (free(node), 0);
+	for (i = index; ht->array[i]; i++)
+	{
+		if (strcmp(ht->array[i]->key, key) == 0)
+		{
+			free(ht->array[i]->value);
+			ht->array[i]->value = string;
+			return (1);
+		}
+	}
 	node->key = strdup(key);
-	node->value = strdup(value);
-
+	if (!(node->key))
+		return (free(node), 0);
+	node->value = string;
 	temp = ht->array[index];
 	node->next = temp;
 	ht->array[index] = node;
