@@ -4,6 +4,7 @@
 
 /**
  * hash_table_set - adds a key:value pair to the hash table
+ * @ht: hash table to add the pair to
  * @key: key to add
  * @value: value to add
  *
